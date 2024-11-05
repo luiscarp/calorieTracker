@@ -25,8 +25,15 @@ export default function Form() {
     return name.trim() !== "" && calories > 0
   }
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log("Se envia")
+  }
+
   return (
-    <form className=" space-y-5 bg-white shadow p-10 rounded-lg">
+    <form className=" space-y-5 bg-white shadow p-10 rounded-lg"
+    onSubmit={ handleSubmit }
+    >
       <div className=" grid grid-cols-1 gap-3">
         <label htmlFor="category" className=" font-bold">
           Categoria:
@@ -35,7 +42,7 @@ export default function Form() {
           value={activity.category}
           id="category"
           className=" border border-slate-300 p-2 rounded-lg w-full bg-white"
-          onChange={handleChange}
+          onChange={e => handleSubmit}
         >
           {categories.map((category) => (
             <option key={category.id} value={category.id}>
