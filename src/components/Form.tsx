@@ -7,8 +7,9 @@ export default function Form() {
     name: "",
     calories: 0,
   });
+  
 
-  const handleChange = (e)=>{
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>)=>{
     console.log(e.target)
     setActivity({
         ... activity,
@@ -46,7 +47,7 @@ export default function Form() {
           className=" border border-slate-300 p-w rounded-lg"
           placeholder="Ej. Comida, jugo de naranja, ensalada, ejercicio, pesas, bicicleta"
           value={activity.name}
-          onChange={handleChange}
+          onChange={handleChange }
         ></input>
       </div>
 
