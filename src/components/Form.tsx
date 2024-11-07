@@ -8,31 +8,35 @@ export default function Form() {
     name: "",
     calories: 0,
   });
-  
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>)=>{
-    const isNumberField = ["category", "calories"].includes(e.target.id)
-   
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const isNumberField = ["category", "calories"].includes(e.target.id);
+
     setActivity({
-        ... activity,
-        [e.target.id]: isNumberField ? +e.target.value : e.target.value
-    })
-  }
+      ...activity,
+      [e.target.id]: isNumberField ? +e.target.value : e.target.value,
+    });
+  };
 
-  const isValidActivity = () =>{
-    const {name, calories} = activity
-    
-    return name.trim() !== "" && calories > 0
-  }
+  const isValidActivity = () => {
+    const { name, calories } = activity;
+
+    return name.trim() !== "" && calories > 0;
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    console.log("Se envia")
-  }
+    e.preventDefault();
+    console.log("Se envia");
+  };
 
   return (
-    <form className=" space-y-5 bg-white shadow p-10 rounded-lg"
-    onSubmit={ handleSubmit }
+    <form
+      className=" space-y-5 bg-white shadow p-10 rounded-lg"
+      onSubmit={handleSubmit}
     >
       <div className=" grid grid-cols-1 gap-3">
         <label htmlFor="category" className=" font-bold">
@@ -42,7 +46,7 @@ export default function Form() {
           value={activity.category}
           id="category"
           className=" border border-slate-300 p-2 rounded-lg w-full bg-white"
-          onChange={e => handleSubmit}
+          onChange={handleChange}
         >
           {categories.map((category) => (
             <option key={category.id} value={category.id}>
@@ -62,7 +66,7 @@ export default function Form() {
           className=" border border-slate-300 p-w rounded-lg"
           placeholder="Ej. Comida, jugo de naranja, ensalada, ejercicio, pesas, bicicleta"
           value={activity.name}
-          onChange={handleChange }
+          onChange={handleChange}
         ></input>
       </div>
 
@@ -84,7 +88,7 @@ export default function Form() {
         type="submit"
         className=" bg-gray-800 hover:bg-gray-900 w-full p-2 font-bold uppercase text-white cursor-pointer disabled:opacity-10"
         value={activity.category === 1 ? "Guardar Comida" : "Guardar Ejercicio"}
-        disabled = {!isValidActivity()}
+        disabled={!isValidActivity()}
       />
     </form>
   );
